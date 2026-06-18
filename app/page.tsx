@@ -36,19 +36,6 @@ export default function HomePage() {
           aria-hidden="true"
           className="motion-float pointer-events-none absolute left-[10%] top-[-8%] h-[320px] w-[320px] rounded-full bg-accent/10 blur-[110px]"
         />
-        <div
-          aria-hidden="true"
-          className="motion-float-slow motion-pulse-soft pointer-events-none absolute right-[10%] top-[12%] h-[260px] w-[260px] rounded-full bg-accent/8 blur-[110px]"
-        />
-        <div aria-hidden="true" className="hero-weather">
-          <div className="hero-cloud hidden md:block">
-            <span className="hero-cloud-puff hero-cloud-puff-1" />
-            <span className="hero-cloud-puff hero-cloud-puff-2" />
-            <span className="hero-cloud-puff hero-cloud-puff-3" />
-            <span className="hero-cloud-base" />
-          </div>
-          <div className="hero-rain" />
-        </div>
         <div className="site-container relative py-16 md:py-24">
           <div className="grid items-center gap-10 lg:grid-cols-[1.2fr_0.8fr]">
             <div className="max-w-4xl">
