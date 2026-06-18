@@ -5,6 +5,7 @@ import { CheckCircle2 } from 'lucide-react'
 import { company } from '@/lib/site-data'
 import { cn } from '@/lib/utils'
 
+//
 const slides = [
   {
     title: 'Assistive technology',
