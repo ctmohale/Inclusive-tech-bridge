@@ -5,7 +5,7 @@ export const company = {
   registration: '2026/428953/07',
   tagline: 'Technology for Everyone, Solutions for All',
   url: 'https://inclusivetechbridge.co.za',
-  email: 'info@inclusivetechhub.co.za',
+  email: 'info@inclusivetechbridge.co.za',
   phone: '0725966536',
   phoneIntl: '+27725966536',
   location: 'Burgersfort, Limpopo, South Africa',

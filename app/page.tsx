@@ -41,7 +41,7 @@ export default function HomePage() {
           className="motion-float-slow motion-pulse-soft pointer-events-none absolute right-[10%] top-[12%] h-[260px] w-[260px] rounded-full bg-accent/8 blur-[110px]"
         />
         <div aria-hidden="true" className="hero-weather">
-          <div className="hero-cloud">
+          <div className="hero-cloud hidden md:block">
             <span className="hero-cloud-puff hero-cloud-puff-1" />
             <span className="hero-cloud-puff hero-cloud-puff-2" />
             <span className="hero-cloud-puff hero-cloud-puff-3" />
