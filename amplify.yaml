@@ -3,13 +3,10 @@ frontend:
   phases:
     preBuild:
       commands:
-        - corepack enable
-        - pnpm install --frozen-lockfile
+        - npm ci
     build:
       commands:
-        - pnpm run build
-        - ls -la
-        - ls -la out
+        - npm run build
   artifacts:
     baseDirectory: out
     files:
