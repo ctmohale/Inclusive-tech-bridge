@@ -38,9 +38,9 @@ export const metadata: Metadata = {
       'Accessible, reliable and professional technology solutions for people of all abilities.',
     images: [
       {
-        url: '/images/logo.png',
-        width: 512,
-        height: 512,
+        url: `${company.url}/images/logo.png`,
+        width: 500,
+        height: 500,
         alt: `${company.brandName} company logo`,
       },
     ],
@@ -50,16 +50,14 @@ export const metadata: Metadata = {
     title: 'Inclusive Tech Bridge (Pty) Ltd | Technology for Everyone',
     description:
       'Accessible, reliable and professional technology solutions for people of all abilities.',
-    images: ['/images/logo.png'],
+    images: [`${company.url}/images/logo.png`],
   },
   icons: {
     icon: [
-      { url: '/icon-light-32x32.png', media: '(prefers-color-scheme: light)' },
-      { url: '/icon-dark-32x32.png', media: '(prefers-color-scheme: dark)' },
-      { url: '/icon.svg', type: 'image/svg+xml' },
-      { url: '/images/logo.png', sizes: '512x512', type: 'image/png' },
+      { url: '/images/logo.png', sizes: '500x500', type: 'image/png' },
     ],
     apple: '/apple-icon.png',
+    shortcut: '/images/logo.png',
   },
   manifest: '/manifest.webmanifest',
 }
