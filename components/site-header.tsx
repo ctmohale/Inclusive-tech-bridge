@@ -18,12 +18,13 @@ export function SiteHeader() {
         <div className="flex items-center gap-8">
           <Link
             href="/"
+            aria-label={`${company.brandName} home`}
             className="flex items-center gap-2.5 rounded-md font-heading text-base font-semibold tracking-tight text-foreground"
           >
-            <span aria-hidden="true" className="overflow-hidden rounded-lg">
+            <span className="overflow-hidden rounded-lg">
               <Image
                 src="/images/logo.png"
-                alt=""
+                alt={`${company.brandName} logo`}
                 width={88}
                 height={88}
                 className="h-[88px] w-[88px] object-contain"
@@ -77,6 +78,7 @@ export function SiteHeader() {
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
             aria-controls="mobile-menu"
+            aria-label={open ? 'Close menu' : 'Open menu'}
             className="inline-flex items-center justify-center rounded-md p-2 text-foreground hover:bg-secondary md:hidden"
           >
             <span className="sr-only">{open ? 'Close menu' : 'Open menu'}</span>

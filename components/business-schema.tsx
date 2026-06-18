@@ -11,12 +11,18 @@ export function BusinessSchema() {
     slogan: company.tagline,
     email: company.email,
     telephone: company.phoneIntl,
-    url: 'https://inclusivetechbridge.co.za',
+    url: company.url,
+    image: `${company.url}/images/logo.png`,
+    logo: `${company.url}/images/logo.png`,
+    founder: {
+      '@type': 'Person',
+      name: company.founder,
+    },
     address: {
       '@type': 'PostalAddress',
-      addressLocality: 'Burgersfort',
-      addressRegion: 'Limpopo',
-      addressCountry: 'ZA',
+      addressLocality: company.locationLocality,
+      addressRegion: company.locationRegion,
+      addressCountry: company.locationCountry,
     },
     openingHoursSpecification: [
       {

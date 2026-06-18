@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useEffectEvent, useState } from 'react'
-import { CheckCircle2 } from 'lucide-react'
+import { CheckCircle2, Pause, Play } from 'lucide-react'
 import { company } from '@/lib/site-data'
 import { cn } from '@/lib/utils'
 
@@ -38,26 +38,54 @@ const slides = [
 
 export function HeroSlideshow() {
   const [activeIndex, setActiveIndex] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
 
   const advanceSlide = useEffectEvent(() => {
     setActiveIndex((current) => (current + 1) % slides.length)
   })
 
   useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    if (mediaQuery.matches) {
+      setIsPaused(true)
+      return
+    }
+
+    if (isPaused) return
+
     const interval = window.setInterval(() => {
       advanceSlide()
     }, 4200)
 
     return () => window.clearInterval(interval)
-  }, [advanceSlide])
+  }, [advanceSlide, isPaused])
 
   return (
-    <div className="motion-fade-up-delay-4 hero-shine surface-card p-8 md:p-10">
+    <section
+      aria-labelledby="hero-slideshow-title"
+      className="motion-fade-up-delay-4 hero-shine surface-card p-8 md:p-10"
+    >
       <div className="flex items-center justify-between gap-4">
-        <p className="font-mono text-xs uppercase tracking-[0.24em] text-accent">
+        <p
+          id="hero-slideshow-title"
+          className="font-mono text-xs uppercase tracking-[0.24em] text-accent"
+        >
           At a glance
         </p>
         <div className="flex items-center gap-2">
+          <button
+            type="button"
+            aria-pressed={isPaused}
+            aria-label={isPaused ? 'Resume slideshow' : 'Pause slideshow'}
+            onClick={() => setIsPaused((current) => !current)}
+            className="inline-flex h-9 items-center justify-center rounded-full border border-accent/20 bg-white px-3 text-accent transition-colors hover:bg-accent/10"
+          >
+            {isPaused ? (
+              <Play className="h-4 w-4" aria-hidden="true" />
+            ) : (
+              <Pause className="h-4 w-4" aria-hidden="true" />
+            )}
+          </button>
           {slides.map((slide, index) => (
             <button
               key={slide.title}
@@ -94,10 +122,11 @@ export function HeroSlideshow() {
         ))}
       </dl>
 
-      <div className="relative mt-6 min-h-[250px]">
+      <div className="relative mt-6 min-h-[250px]" aria-live="polite">
         {slides.map((slide, index) => (
           <article
             key={slide.title}
+            aria-labelledby={`slide-title-${index}`}
             className={cn(
               'absolute inset-0 rounded-[1.5rem] border border-accent/10 bg-white p-6 transition-all duration-500 ease-out',
               activeIndex === index
@@ -109,7 +138,10 @@ export function HeroSlideshow() {
             <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-accent">
               Featured Service
             </p>
-            <h3 className="mt-3 font-heading text-3xl font-semibold text-foreground">
+            <h3
+              id={`slide-title-${index}`}
+              className="mt-3 font-heading text-3xl font-semibold text-foreground"
+            >
               {slide.title}
             </h3>
             <p className="mt-3 text-base leading-relaxed text-muted-foreground">
@@ -138,6 +170,6 @@ export function HeroSlideshow() {
           {company.location}
         </p>
       </div>
-    </div>
+    </section>
   )
 }

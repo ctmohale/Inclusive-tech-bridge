@@ -123,6 +123,22 @@
 }
 
 @layer base {
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    z-index: 100;
+    transform: translateY(-220%);
+    border-radius: 9999px;
+    background: var(--foreground);
+    color: white;
+    padding: 0.75rem 1rem;
+    font-weight: 600;
+    transition: transform 160ms ease;
+  }
+  .skip-link:focus {
+    transform: translateY(0);
+  }
   * {
     @apply border-border outline-ring/50;
   }
@@ -157,6 +173,17 @@
   }
   ::selection {
     background: oklch(0.72 0.11 230 / 0.22);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 

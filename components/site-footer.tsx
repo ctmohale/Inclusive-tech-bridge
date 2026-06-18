@@ -13,10 +13,10 @@ export function SiteFooter() {
       <div className="site-container relative grid gap-8 py-14 md:grid-cols-3">
         <div>
           <div className="flex items-center gap-2.5">
-            <span aria-hidden="true" className="overflow-hidden rounded-lg">
+            <span className="overflow-hidden rounded-lg">
               <Image
                 src="/images/logo.png"
-                alt=""
+                alt={`${company.brandName} logo`}
                 width={124}
                 height={124}
                 className="h-[124px] w-[124px] object-contain"
