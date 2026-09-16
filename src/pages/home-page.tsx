@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { Link } from 'react-router-dom'
 import {
   ArrowRight,
   ShieldCheck,
@@ -14,6 +14,7 @@ import {
 import { PageShell } from '@/components/page-shell'
 import { BusinessSchema } from '@/components/business-schema'
 import { HeroSlideshow } from '@/components/hero-slideshow'
+import { PageMetadata } from '@/components/page-metadata'
 import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { services, coreValues, company } from '@/lib/site-data'
@@ -21,6 +22,9 @@ import { services, coreValues, company } from '@/lib/site-data'
 export default function HomePage() {
   return (
     <PageShell>
+      <PageMetadata
+        description="Inclusive Tech Bridge (ITB) is a South African technology service company providing accessible, reliable technology solutions for individuals, businesses, schools and organizations of all abilities."
+      />
       <BusinessSchema />
 
       {/* Hero */}
@@ -55,7 +59,7 @@ export default function HomePage() {
               </p>
               <div className="motion-fade-up-delay-2 mt-9 flex flex-col items-start gap-3 sm:flex-row">
                 <Link
-                  href="/services"
+                  to="/services"
                   className={cn(
                     buttonVariants({ size: 'lg' }),
                     'interactive-lift rounded-full bg-foreground px-7 text-white shadow-[0_18px_34px_-18px_rgba(15,23,42,0.45)] hover:bg-foreground/92',
@@ -65,7 +69,7 @@ export default function HomePage() {
                   <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
                 </Link>
                 <Link
-                  href="/contact"
+                  to="/contact"
                   className={cn(
                     buttonVariants({ size: 'lg', variant: 'outline' }),
                     'interactive-lift rounded-full border-foreground/12 bg-white px-7 text-foreground hover:bg-secondary',
@@ -251,7 +255,7 @@ export default function HomePage() {
             {services.map((service) => (
               <li key={service.slug} className="surface-card-soft group">
                 <Link
-                  href="/services"
+                  to="/services"
                   className="flex h-full flex-col p-6 transition-colors hover:bg-secondary/35"
                 >
                   <span className="flex w-fit items-center justify-center rounded-lg border border-accent/30 bg-accent/10 p-2 text-accent">
@@ -363,7 +367,7 @@ export default function HomePage() {
               </div>
               <div className="flex flex-col gap-3 sm:flex-row md:flex-col">
                 <Link
-                  href="/contact"
+                  to="/contact"
                   className={cn(
                     buttonVariants({ size: 'lg' }),
                     'rounded-full bg-accent text-background hover:bg-accent/90 glow-accent',
@@ -373,7 +377,7 @@ export default function HomePage() {
                   <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
                 </Link>
                 <Link
-                  href="/services"
+                  to="/services"
                   className={cn(
                     buttonVariants({ size: 'lg', variant: 'outline' }),
                     'rounded-full border-border bg-white text-foreground hover:bg-secondary',

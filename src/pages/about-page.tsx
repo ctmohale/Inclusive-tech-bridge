@@ -1,17 +1,10 @@
-import type { Metadata } from 'next'
-import Image from 'next/image'
-import Link from 'next/link'
+import { Link } from 'react-router-dom'
 import { ArrowRight, Quote } from 'lucide-react'
 import { PageShell } from '@/components/page-shell'
+import { PageMetadata } from '@/components/page-metadata'
 import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { company } from '@/lib/site-data'
-
-export const metadata: Metadata = {
-  title: 'About Us',
-  description:
-    'Inclusive Tech Bridge was founded by Hlompho Mphethi, a self-taught technology specialist who is totally blind, with over 11 years of hands-on experience bridging technology and accessibility.',
-}
 
 export default function AboutPage() {
   const points = [
@@ -25,6 +18,11 @@ export default function AboutPage() {
 
   return (
     <PageShell>
+      <PageMetadata
+        title="About Us"
+        path="/about"
+        description="Inclusive Tech Bridge was founded by Hlompho Mphethi, a self-taught technology specialist who is totally blind, with over 11 years of hands-on experience bridging technology and accessibility."
+      />
       <section
         aria-labelledby="about-heading"
         className="relative overflow-hidden border-b border-border"
@@ -57,7 +55,7 @@ export default function AboutPage() {
       <section aria-labelledby="founder-heading" className="bg-background">
         <div className="site-container grid items-center gap-10 py-20 md:grid-cols-2">
           <div className="surface-card overflow-hidden p-2">
-            <Image
+            <img
               src="/images/about-founder.png"
               alt="The founder of Inclusive Tech Bridge working confidently at a computer using a braille display and assistive technology."
               width={800}
@@ -146,7 +144,7 @@ export default function AboutPage() {
               </h2>
               <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
                 <Link
-                  href="/services"
+                  to="/services"
                   className={cn(
                     buttonVariants({ size: 'lg' }),
                     'rounded-full bg-accent text-background hover:bg-accent/90 glow-accent',
@@ -156,7 +154,7 @@ export default function AboutPage() {
                   <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
                 </Link>
                 <Link
-                  href="/contact"
+                  to="/contact"
                   className={cn(
                     buttonVariants({ size: 'lg', variant: 'outline' }),
                     'rounded-full border-border bg-white text-foreground hover:bg-secondary',

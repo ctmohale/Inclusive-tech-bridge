@@ -1,18 +1,17 @@
-import type { Metadata } from 'next'
 import { Mail, Phone, MapPin, Clock } from 'lucide-react'
 import { PageShell } from '@/components/page-shell'
 import { ContactForm } from '@/components/contact-form'
+import { PageMetadata } from '@/components/page-metadata'
 import { company } from '@/lib/site-data'
-
-export const metadata: Metadata = {
-  title: 'Contact Us',
-  description:
-    'Contact Inclusive Tech Bridge in Burgersfort, Limpopo. Email, call or WhatsApp us, or send a message using our accessible contact form.',
-}
 
 export default function ContactPage() {
   return (
     <PageShell>
+      <PageMetadata
+        title="Contact Us"
+        path="/contact"
+        description="Contact Inclusive Tech Bridge in Burgersfort, Limpopo. Email, call or WhatsApp us, or send a message using our accessible contact form."
+      />
       <section
         aria-labelledby="contact-heading"
         className="relative overflow-hidden border-b border-border"

@@ -1,20 +1,19 @@
-import type { Metadata } from 'next'
-import Link from 'next/link'
+import { Link } from 'react-router-dom'
 import { ArrowRight, CheckCircle2 } from 'lucide-react'
 import { PageShell } from '@/components/page-shell'
+import { PageMetadata } from '@/components/page-metadata'
 import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { services } from '@/lib/site-data'
 
-export const metadata: Metadata = {
-  title: 'Services',
-  description:
-    'Explore Inclusive Tech Bridge services: assistive technology and braille, computer maintenance, networking support, Python lessons, computer literacy for matric learners, and workplace accessibility training.',
-}
-
 export default function ServicesPage() {
   return (
     <PageShell>
+      <PageMetadata
+        title="Services"
+        path="/services"
+        description="Explore Inclusive Tech Bridge services: assistive technology and braille, computer maintenance, networking support, Python lessons, computer literacy for matric learners, and workplace accessibility training."
+      />
       <section
         aria-labelledby="services-heading"
         className="relative overflow-hidden border-b border-border"
@@ -114,7 +113,7 @@ export default function ServicesPage() {
               </p>
               <div className="mt-8">
                 <Link
-                  href="/contact"
+                  to="/contact"
                   className={cn(
                     buttonVariants({ size: 'lg' }),
                     'rounded-full bg-accent text-background hover:bg-accent/90 glow-accent',

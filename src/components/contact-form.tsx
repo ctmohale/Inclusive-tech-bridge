@@ -1,5 +1,3 @@
-'use client'
-
 import { useState, useRef } from 'react'
 import { Send, CheckCircle2, AlertCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -13,9 +11,10 @@ const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 export function ContactForm() {
   const [errors, setErrors] = useState<Errors>({})
   const [submitted, setSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState('')
   const errorSummaryRef = useRef<HTMLDivElement>(null)
 
-  ////
   function validate(data: FormData): Errors {
     const next: Errors = {}
     const fullName = String(data.get('fullName') ?? '').trim()
@@ -34,12 +33,13 @@ export function ContactForm() {
     return next
   }
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const form = event.currentTarget
     const data = new FormData(form)
     const nextErrors = validate(data)
     setErrors(nextErrors)
+    setSubmitError('')
 
     if (Object.keys(nextErrors).length > 0) {
       setSubmitted(false)
@@ -48,17 +48,47 @@ export function ContactForm() {
       return
     }
 
-    setSubmitted(true)
-    form.reset()
+    setIsSubmitting(true)
+
+    try {
+      const response = await fetch('/api/powermail.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: String(data.get('fullName') ?? '').trim(),
+          email: String(data.get('email') ?? '').trim(),
+          phone: String(data.get('phone') ?? '').trim(),
+          service: String(data.get('service') ?? '').trim(),
+          message: String(data.get('message') ?? '').trim(),
+        }),
+      })
+      const result = await response.json().catch(() => null)
+
+      if (!response.ok || result?.sent !== true) {
+        throw new Error(result?.error || 'Unable to send your message.')
+      }
+
+      setSubmitted(true)
+      form.reset()
+    } catch {
+      setSubmitted(false)
+      setSubmitError(
+        'Sorry, your message could not be sent right now. Please try again or contact us by email or WhatsApp.',
+      )
+      requestAnimationFrame(() => errorSummaryRef.current?.focus())
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const fieldClass =
     'mt-1 w-full rounded-2xl border border-accent/10 bg-white px-4 py-3 text-foreground shadow-sm transition-colors placeholder:text-muted-foreground focus:border-accent/60'
+  const hasErrors = Object.keys(errors).length > 0 || submitError !== ''
 
   return (
-    <form noValidate onSubmit={handleSubmit} className="space-y-5">
+    <form noValidate onSubmit={handleSubmit} className="space-y-5" aria-busy={isSubmitting}>
       {/* Error summary */}
-      {Object.keys(errors).length > 0 && (
+      {hasErrors && (
         <div
           ref={errorSummaryRef}
           tabIndex={-1}
@@ -73,15 +103,18 @@ export function ContactForm() {
             <AlertCircle className="h-5 w-5" aria-hidden="true" />
             There is a problem with your form
           </p>
-          <ul className="mt-2 list-inside list-disc text-sm text-destructive">
-            {Object.entries(errors).map(([key, value]) => (
-              <li key={key}>
-                <a href={`#${key}`} className="underline underline-offset-2">
-                  {value}
-                </a>
-              </li>
-            ))}
-          </ul>
+          {submitError && <p className="mt-2 text-sm text-destructive">{submitError}</p>}
+          {Object.keys(errors).length > 0 && (
+            <ul className="mt-2 list-inside list-disc text-sm text-destructive">
+              {Object.entries(errors).map(([key, value]) => (
+                <li key={key}>
+                  <a href={`#${key}`} className="underline underline-offset-2">
+                    {value}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       )}
 
@@ -220,11 +253,12 @@ export function ContactForm() {
       <Button
         type="submit"
         size="lg"
+        disabled={isSubmitting}
         className={cn(
           'rounded-full bg-accent text-background hover:bg-accent/90 glow-accent',
         )}
       >
-        Send Message
+        {isSubmitting ? 'Sending...' : 'Send Message'}
         <Send className="ml-2 h-4 w-4" aria-hidden="true" />
       </Button>
     </form>

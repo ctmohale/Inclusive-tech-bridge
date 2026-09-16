@@ -1,5 +1,4 @@
-import Image from 'next/image'
-import Link from 'next/link'
+import { Link } from 'react-router-dom'
 import { Mail, Phone, MapPin } from 'lucide-react'
 import { company, navLinks } from '@/lib/site-data'
 
@@ -14,7 +13,7 @@ export function SiteFooter() {
         <div>
           <div className="flex items-center gap-2.5">
             <span className="overflow-hidden rounded-lg">
-              <Image
+              <img
                 src="/images/logo.png"
                 alt={`${company.brandName} logo`}
                 width={124}
@@ -41,7 +40,7 @@ export function SiteFooter() {
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <Link
-                    href={link.href}
+                    to={link.href}
                     className="rounded text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline"
                   >
                     {link.label}

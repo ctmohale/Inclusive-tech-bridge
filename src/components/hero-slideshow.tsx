@@ -1,11 +1,8 @@
-'use client'
-
-import { useEffect, useEffectEvent, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { CheckCircle2, Pause, Play } from 'lucide-react'
 import { company } from '@/lib/site-data'
 import { cn } from '@/lib/utils'
 
-//
 const slides = [
   {
     title: 'Assistive technology',
@@ -40,10 +37,6 @@ export function HeroSlideshow() {
   const [activeIndex, setActiveIndex] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
 
-  const advanceSlide = useEffectEvent(() => {
-    setActiveIndex((current) => (current + 1) % slides.length)
-  })
-
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
     if (mediaQuery.matches) {
@@ -54,11 +47,11 @@ export function HeroSlideshow() {
     if (isPaused) return
 
     const interval = window.setInterval(() => {
-      advanceSlide()
+      setActiveIndex((current) => (current + 1) % slides.length)
     }, 4200)
 
     return () => window.clearInterval(interval)
-  }, [advanceSlide, isPaused])
+  }, [isPaused])
 
   return (
     <section

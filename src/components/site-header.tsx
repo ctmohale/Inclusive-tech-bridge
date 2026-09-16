@@ -1,15 +1,11 @@
-'use client'
-
-import Image from 'next/image'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 import { useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { Menu, X, ArrowUpRight } from 'lucide-react'
 import { company, navLinks } from '@/lib/site-data'
 import { cn } from '@/lib/utils'
 
 export function SiteHeader() {
-  const pathname = usePathname()
+  const { pathname } = useLocation()
   const [open, setOpen] = useState(false)
 
   return (
@@ -17,12 +13,12 @@ export function SiteHeader() {
       <div className="site-container flex items-center justify-between gap-4 py-0">
         <div className="flex items-center gap-8">
           <Link
-            href="/"
+            to="/"
             aria-label={`${company.brandName} home`}
             className="flex items-center gap-2.5 rounded-md font-heading text-base font-semibold tracking-tight text-foreground"
           >
             <span className="overflow-hidden rounded-lg">
-              <Image
+              <img
                 src="/images/logo.png"
                 alt={`${company.brandName} logo`}
                 width={88}
@@ -40,7 +36,7 @@ export function SiteHeader() {
                 return (
                   <li key={link.href}>
                     <Link
-                      href={link.href}
+                      to={link.href}
                       aria-current={isActive ? 'page' : undefined}
                       className={cn(
                         'inline-block rounded-md px-3 py-2 text-sm font-medium transition-colors hover:text-foreground',
@@ -66,7 +62,7 @@ export function SiteHeader() {
 
         <div className="flex items-center gap-2">
           <Link
-            href="/contact"
+            to="/contact"
             className="hidden items-center gap-1.5 rounded-full border border-accent/40 bg-accent/10 px-4 py-2 text-sm font-semibold text-accent transition-colors hover:bg-accent/20 md:inline-flex"
           >
             Contact Us
@@ -103,7 +99,7 @@ export function SiteHeader() {
               return (
                 <li key={link.href}>
                   <Link
-                    href={link.href}
+                    to={link.href}
                     aria-current={isActive ? 'page' : undefined}
                     onClick={() => setOpen(false)}
                     className={cn(
@@ -120,7 +116,7 @@ export function SiteHeader() {
             })}
             <li className="px-3 py-3">
               <Link
-                href="/contact"
+                to="/contact"
                 onClick={() => setOpen(false)}
                 className="inline-flex items-center gap-1.5 rounded-full border border-accent/40 bg-accent/10 px-4 py-2 text-sm font-semibold text-accent"
               >
