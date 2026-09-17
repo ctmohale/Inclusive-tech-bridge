@@ -25,8 +25,6 @@ The production site is written to `dist/`. Preview it locally with:
 npm run preview
 ```
 
-The project is configured for AWS Amplify using the repository-root [amplify.yml](./amplify.yml) file. Configure a `200` rewrite from `/<*>` to `/index.html` in Amplify so direct visits to React routes work. The generated output also includes `_redirects` and `.htaccess` fallbacks for compatible static and Apache hosts.
-
 ## Railway deployment
 
 The root `Dockerfile` builds the React application and serves the resulting site with Caddy and PHP-FPM. It reads Railway's `PORT` variable automatically and keeps `/api/powermail.php` available.
