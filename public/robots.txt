@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://inclusivetechbridge.co.za/sitemap.xml
+Sitemap: https://www.inclusivetechbridge.co.za/sitemap.xml

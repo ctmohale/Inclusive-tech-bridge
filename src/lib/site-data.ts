@@ -4,7 +4,7 @@ export const company = {
   abbreviation: 'ITB',
   registration: '2026/428953/07',
   tagline: 'Technology for Everyone, Solutions for All',
-  url: 'https://inclusivetechbridge.co.za',
+  url: 'https://www.inclusivetechbridge.co.za',
   email: 'info@inclusivetechbridge.co.za',
   phone: '0725966536',
   phoneIntl: '+27725966536',
